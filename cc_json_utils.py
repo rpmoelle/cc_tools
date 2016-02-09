@@ -53,8 +53,10 @@ def make_field_from_json(field_type,field_data):
             tx = i["trap"][0]["trap"][0]
             ty = i["trap"][0]["trap"][1]
             #add the trap and button coordinates to the list of traps
+            print("These are the traps being added: " + str(cc_data.CCTrapControl(bx,by,tx,ty)))
             all_traps.append(cc_data.CCTrapControl(bx,by,tx,ty))
         #Now that we have position data for all the sets of traps and buttons,make the trap field
+        print("All traps are: "+ str(all_traps[0]))
         return  cc_data.CCTrapControlsField(all_traps)
     elif field_type == cc_data.CCCloningMachineControlsField.TYPE:
         #If we are making trap controls, field_data will be a dict of machine coordinates
@@ -101,7 +103,7 @@ def make_field_from_json(field_type,field_data):
             print("Monster y is " + str(monster_y))
             monsters.append(cc_data.CCCoordinate(monster_x, monster_y))
         #print(monsters)
-        return cc_data.CCMonsterMovementField(str(monsters))
+        return cc_data.CCMonsterMovementField(monsters)
     else:
         if __debug__:
             raise AssertionError("Unsupported field type: " + str(field_type))
