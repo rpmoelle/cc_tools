@@ -93,14 +93,15 @@ def make_field_from_json(field_type,field_data):
         #It will look something like: [{"monster":[4,4]}]
         #make empty array to store monster position data
         monsters = []
-        index = 0
         for i in field_data:
             #i is the "monster" key entry/heading, its subs are coordinate values
             monster_x = i["monster"][0]
+            print("Monster x is " + str(monster_x))
             monster_y = i["monster"][1]
-            index = index+2
+            print("Monster y is " + str(monster_y))
             monsters.append(cc_data.CCCoordinate(monster_x, monster_y))
-        return cc_data.CCMonsterMovementField(monsters)
+        #print(monsters)
+        return cc_data.CCMonsterMovementField(str(monsters))
     else:
         if __debug__:
             raise AssertionError("Unsupported field type: " + str(field_type))
@@ -179,7 +180,7 @@ def make_level_from_json(json_level_data):
     #Get/Set Upper Layer
     level.upper_layer = make_layer_from_json(json_level_data["Upper Layer"])
     #Get/Set lower layer
-    level.lower_level = make_layer_from_json(json_level_data["Lower Layer"])
+    level.lower_layer = make_layer_from_json(json_level_data["Lower Layer"])
     #Get/Set Optional Fields: Map Title, Traps, Cloning Machines, password, hint text, and monsters
     level.optional_fields = make_optional_fields_from_json(json_level_data)
     return level
