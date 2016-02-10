@@ -5,6 +5,7 @@ This file contains the methods to take a json file and turn it into a dat file
 import json
 import cc_data
 import cc_dat_utils
+import sys
 
 def make_layer_from_json(json_layer_data):
     """Constructs layer data (a 1024 list of ints) from the given json level data
@@ -216,11 +217,19 @@ def make_cc_data_from_json(input_json_filename):
     print("Number of levels:" + str(len(data.levels)))
     return data
 
+"""
 #Ask for the input file
 input_json_filename = input("Enter your input json filename, then press enter:")
 #Ask for the output file
 output_dat_filename = input("Enter your output dat filename, then press enter:")
-print("Now taking data from " +input_json_filename + " and turning it into a playable CC level.")
+"""
+#Get command line data
+command_line_input = sys.argv
+#Note that the 0th element is the name of this script
+input_json_filename = command_line_input[1]
+print("Args" + str(command_line_input))
+output_dat_filename = command_line_input[2]
+print("Now taking data from" +input_json_filename + "and turning it into a playable CC level.")
 print("Look for the playable level as "+ output_dat_filename)
 #Make a CCdatafile; change name to output dat file name?
 cc_data_file = make_cc_data_from_json(input_json_filename)
